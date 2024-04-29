@@ -23,11 +23,7 @@ class Program
     {
         List<Entry> _entries = new List<Entry>();
                 
-        string menu = "7"; 
-
-        
-               
-
+        string menu = "7";                
         
         do
         {
@@ -92,7 +88,7 @@ class Program
                     {
                         foreach (Entry Entry in _entries)
                         
-                        { outputFile.WriteLine($"{Entry._date}~{Entry._promptText}~{Entry._entryText}");}               
+                        { outputFile.WriteLine($"{Entry._date},~,\"{Entry._promptText}\",~,{Entry._entryText}");}               
 
                     }
     }
@@ -156,7 +152,9 @@ class Program
                     
                     Entryadd.Display();
                     
-                    Entryadd._entryText = Console.ReadLine();
+                    String juniper = Console.ReadLine();
+
+                    Entryadd._entryText =$"\"{juniper}\"";
 
                     _entries.Add(Entryadd);
 
