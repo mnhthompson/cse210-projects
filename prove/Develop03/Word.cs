@@ -6,11 +6,9 @@ public class Word
 
 {
 
-    public string _text;
+    private string _text;
 
-    public bool _ishidden;
-
-
+    private bool _ishidden;
 
 
     public string Hide( string _text , bool _ishidden)
@@ -123,8 +121,70 @@ public class Word
 
   
 
+  
 
 
+            public static void HideRandom(List<Word>_words)
+
+            {
+               
+                int counter = 0;
+               
+
+                do{
+                Word lexicon = new Word();
+
+                Random rnd = new Random();
+                int random = rnd.Next(0, _words.Count);
+
+                int samerandom = random;
+
+                lexicon = _words[samerandom];
+
+                 lexicon._text=lexicon.Hide(lexicon._text, lexicon._ishidden);
+
+                 
+                 lexicon._ishidden= lexicon.IsHidden(lexicon._text,lexicon._ishidden); 
+
+                 _words[samerandom]=lexicon;                 
+
+                counter+=1;
+
+                }
+                while (counter != 5);
+
+                
+            }
+
+
+
+
+  public static bool IsCompHidden(List<Word>_words, bool end)
+        {
+
+            int check =0;                                   
+
+            foreach( var item in _words)
+
+                if ( item._text == "______")
+
+                    {
+                    check+=1;
+                    
+                        if (check == _words.Count)
+                           { end = true;}
+
+                    
+                    }
+
+                else
+                    {end = false;}
+
+                    
+
+            return end;
+
+        }
 
 
 }

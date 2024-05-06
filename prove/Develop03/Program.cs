@@ -69,41 +69,8 @@ class Program
             void HideRandomWords(List<Word>_words)
 
             {
-                Console.WriteLine("hi");
-                int counter = 0;
-
-                List<int> tracker =new List<int>(_words.Count);
-
-                
-
-                do{
-                Word lexicon = new Word();
-
-                Random rnd = new Random();
-                int random = rnd.Next(0, _words.Count);
-
-                
-
-                int samerandom = random;
-                
-                
-
-                lexicon = _words[samerandom];
-
-                 lexicon._text=lexicon.Hide(lexicon._text, lexicon._ishidden);
-
-                 
-                 lexicon._ishidden= lexicon.IsHidden(lexicon._text,lexicon._ishidden); 
-
-                 _words[samerandom]=lexicon;                 
-
-                Console.WriteLine("hi");
-
-
-                counter+=1;
-
-                }
-                while (counter != 5);
+               
+               Word.HideRandom(_words);
 
                 
             }
@@ -145,25 +112,7 @@ class Program
        bool IsCompletelyHidden(bool end)
         {
 
-            int check =0;                                   
-
-            foreach( var item in _words)
-
-                if ( item._text == "______")
-
-                    {
-                    check+=1;
-                    
-                        if (check == _words.Count)
-                           { end = true;}
-
-                    
-                    }
-
-                else
-                    {end = false;}
-
-                    
+            end = Word.IsCompHidden(_words, end);
 
             return end;
 
