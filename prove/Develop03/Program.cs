@@ -12,8 +12,6 @@ using System.Security.Cryptography.X509Certificates;
 ///
 ///Use the principles of Encapsulation, including proper use of classes, methods, public/private access modifiers, and follow good style throughout.
 
-
-
 ///Contain at least 3 classes in addition to the Program class: one for the scripture itself, one for the reference (for example "John 3:16"), and to represent a word in the scripture.
 
 
@@ -68,14 +66,9 @@ class Program
 
             void HideRandomWords(List<Word>_words)
 
-            {
-               
+            { 
                Word.HideRandom(_words);
-
-                
             }
-
-
 
 ///Accommodate scriptures with multiple verses, such as "Proverbs 3:5-6".
 ///Provide multiple constructors for the scripture reference to handle the case of a single verse and a verse range ("Proverbs 3:5" or "Proverbs 3:5-6").
@@ -89,23 +82,19 @@ class Program
 
                 referenceDis = reference1;
 
-             string Cone = Reference.GetDisplayTextRefrence(reference1);
+             string scripRef = Reference.GetDisplayTextRefrence(reference1);
 
-             string Cream = Word.GetDisplayWord(_words);
+             string scripWord = Word.GetDisplayWord(_words);
 
-               
-
-            
+                      
            
             
-            Console.WriteLine($"{Cone} {Cream}");
+            Console.WriteLine($"{scripRef} {scripWord}");
             
 
          
             }
     
-
-        
         
  ///When all words in the scripture are hidden, the program should end.
 

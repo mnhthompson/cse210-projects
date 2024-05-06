@@ -50,7 +50,7 @@ public class Word
              public static string GetDisplayWord(List<Word> _words)
 
             {
-                string cream ="";
+                string scripWord ="";
 
                 List<string> display =new List<string>();
 
@@ -63,9 +63,9 @@ public class Word
             
            
             
-            cream = string.Join(" ",display);
+            scripWord = string.Join(" ",display);
 
-            return cream;
+            return scripWord;
             
 
          
@@ -102,9 +102,9 @@ public class Word
                 {
                     Word text = new Word(); 
 
-                    string june = item;
+                    string junk = item;
 
-                    text._text = june;
+                    text._text = junk;
 
                     text._ishidden = false;
 

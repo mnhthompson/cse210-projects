@@ -25,23 +25,23 @@ public class Reference
 
                 referenceDis = reference1;
 
-                string cone="";
+                string scripRef="";
 
                 
 
             if (referenceDis._endverse != -1 )
             {
-                cone = $"{referenceDis._book} {referenceDis._chapter}:{referenceDis._verse}-{referenceDis._endverse}";
+                scripRef = $"{referenceDis._book} {referenceDis._chapter}:{referenceDis._verse}-{referenceDis._endverse}";
             }
 
             else
             {
 
-                cone = $"{referenceDis._book} {referenceDis._chapter}:{referenceDis._verse}";
+                scripRef = $"{referenceDis._book} {referenceDis._chapter}:{referenceDis._verse}";
 
             }
 
-            return cone;
+            return scripRef;
 
             }
    
