@@ -36,7 +36,7 @@ class Program
             List<Word> _words = new List<Word>();
             List<Word> _hiddenwords = new List<Word>();
 
-            Scripture(_words);
+            Word.Scripture(_words);
             Reference.ReferenceBuilder(reference1);
             
             do{
@@ -62,54 +62,7 @@ class Program
 
 ///***********************************************************************************************************************************************
 
-             static List<Word> Scripture(List<Word> _words )
-            {
-
-                string textlist = "";
-
-                Library question = new Library();
-                    
-                string fullscript = question.getrandomscript();
-
-                string[] parts = fullscript.Split("~");    
-                          
-                string script = parts[4];
-
-                textlist = script;
-                        
-                string[] frags = textlist.Split(" "); 
-
-                List<string> _port =new List<string>();    
-                
-                
-                foreach (var frag in frags)
-                {         
-                    _port.Add(frag);                  
-                }
-
-
-                foreach (var item in _port)
-                {
-                    Word text = new Word(); 
-
-                    string june = item;
-
-                    text._text = june;
-
-                    text._ishidden = false;
-
-                    _words.Add(text);
-
-
-                }
-                                   
-
-
-            return _words;
-            }
-
-
-///*************************************************************************
+        
 
 ///The program should continue prompting the user and hiding more words until all words in the scripture are hidden.
 
@@ -171,15 +124,14 @@ class Program
 
              string Cone = Reference.GetDisplayTextRefrence(reference1);
 
-                foreach (var item in _words)
-                {
-                 display.Add(item._text);
-                 }
+             string Cream = Word.GetDisplayWord(_words);
+
+               
 
             
            
             
-            Console.WriteLine($"{Cone} {string.Join(" ",display)}");
+            Console.WriteLine($"{Cone} {Cream}");
             
 
          
