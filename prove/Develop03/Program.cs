@@ -49,7 +49,7 @@ class Program
             
             forward =Console.ReadLine();
 
-            HideRandomWords();
+            HideRandomWords(_words);
 
             ///Clear the console screen and display the complete scripture, including the reference and the text.
             Console.Clear();
@@ -60,8 +60,6 @@ class Program
             while( forward.ToLower() !="quit" &&  end != true );
 
 ///***********************************************************************************************************************************************
-
-
 
              static List<Word> Scripture(List<Word> _words )
             {
@@ -78,36 +76,31 @@ class Program
 
                 textlist = script;
                         
- 
-                             
-                Console.WriteLine(textlist);
+                string[] frags = textlist.Split(" "); 
+
+                List<string> _port =new List<string>();    
+                
+                
+                foreach (var frag in frags)
+                {         
+                    _port.Add(frag);                  
+                }
 
 
-                    string[] frags = textlist.Split(" "); 
+                foreach (var item in _port)
+                {
+                    Word text = new Word(); 
 
-                   List<string> _port =new List<string>();    
-                    
-                    
-                    foreach (var frag in frags)
-                    {         
-                        _port.Add(frag);                  
-                    }
+                    string june = item;
 
+                    text._text = june;
 
-                    foreach (var item in _port)
-                    {
-                        Word text = new Word(); 
+                    text._ishidden = false;
 
-                        string june = item;
-
-                        text._text = june;
-
-                        text._ishidden = false;
-
-                        _words.Add(text);
+                    _words.Add(text);
 
 
-                    }
+                }
                                    
 
 
@@ -142,9 +135,10 @@ class Program
 
 ///The program should continue prompting the user and hiding more words until all words in the scripture are hidden.
 
-            List<Word> HideRandomWords()
+            void HideRandomWords(List<Word>_words)
 
             {
+                Console.WriteLine("hi");
                 int counter = 0;
 
                 do{
@@ -153,10 +147,16 @@ class Program
                 Random rnd = new Random();
                 int random = rnd.Next(0, _words.Count);
 
-                lexicon = _words[random];
+                int samerandom = random;
 
-                 lexicon.Hide(lexicon._text);
-                 lexicon.IsHidden();               
+                lexicon = _words[samerandom];
+
+                 lexicon._text=lexicon.Hide(lexicon._text, lexicon._ishidden);
+
+                 
+                 lexicon._ishidden= lexicon.IsHidden(lexicon._text,lexicon._ishidden); 
+
+                 _words[samerandom]=lexicon;          
 
                 _hiddenwords.Add(lexicon);
 
@@ -168,7 +168,7 @@ class Program
                 }
                 while (counter != 5);
 
-                return _words;
+                
             }
 
 
@@ -188,10 +188,6 @@ class Program
                 foreach (var item in _words)
 
                  display.Add(item._text);
-
-                    
-                
-
 
 
             if (referenceDis._endverse != -1 )

@@ -13,17 +13,17 @@ public class Word
 
 
 
-    public void Hide( string _text)
+    public string Hide( string _text , bool _ishidden)
     
     {
         if( _ishidden == false)
         {
 
         _text = "______";
-
-                
+    
         }
-     
+
+        return _text;     
     }
 
 
@@ -31,19 +31,20 @@ public class Word
 
     {
 
+
         _text=_text;
     }
 
-     public bool IsHidden()
+     public bool IsHidden( string _text , bool _ishidden)
 
     {
             if (_text == "______")
 
-                {bool _ishidden = true;}
+                {_ishidden = true;}
 
             else
 
-               { bool _ishidden = false;}
+               {_ishidden = false;}
 
             return _ishidden;
 
