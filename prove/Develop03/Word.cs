@@ -27,14 +27,7 @@ public class Word
     }
 
 
-    void Show()
-
-    {
-
-
-        _text=_text;
-    }
-
+ 
      public bool IsHidden( string _text , bool _ishidden)
 
     {

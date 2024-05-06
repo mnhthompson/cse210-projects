@@ -49,12 +49,13 @@ class Program
             
             forward =Console.ReadLine();
 
+            end = IsCompletelyHidden(end);
+
             HideRandomWords(_words);
 
             ///Clear the console screen and display the complete scripture, including the reference and the text.
             Console.Clear();
 
-            end = IsCompletelyHidden();
 
             }
             while( forward.ToLower() !="quit" &&  end != true );
@@ -141,13 +142,21 @@ class Program
                 Console.WriteLine("hi");
                 int counter = 0;
 
+                List<int> tracker =new List<int>(_words.Count);
+
+                
+
                 do{
                 Word lexicon = new Word();
 
                 Random rnd = new Random();
                 int random = rnd.Next(0, _words.Count);
 
+                
+
                 int samerandom = random;
+                
+                
 
                 lexicon = _words[samerandom];
 
@@ -156,9 +165,7 @@ class Program
                  
                  lexicon._ishidden= lexicon.IsHidden(lexicon._text,lexicon._ishidden); 
 
-                 _words[samerandom]=lexicon;          
-
-                _hiddenwords.Add(lexicon);
+                 _words[samerandom]=lexicon;                 
 
                 Console.WriteLine("hi");
 
@@ -208,16 +215,28 @@ class Program
         
  ///When all words in the scripture are hidden, the program should end.
 
-        bool IsCompletelyHidden()
+       bool IsCompletelyHidden(bool end)
         {
-            
-            if ( _hiddenwords.Count == _words.Count)
 
-                {bool end = true;}
+            int check =0;                                   
 
-            else
+            foreach( var item in _words)
 
-               { bool end = false;}
+                if ( item._text == "______")
+
+                    {
+                    check+=1;
+                    
+                        if (check == _words.Count)
+                           { end = true;}
+
+                    
+                    }
+
+                else
+                    {end = false;}
+
+                    
 
             return end;
 
