@@ -3,7 +3,7 @@ using System.Diagnostics.Metrics;
 using System.Security.Cryptography.X509Certificates;
 
 
-
+/// ***CREATIVITY***Have your program work with a library of scriptures rather than a single one. Choose scriptures at random to present to the user.***CREATIVITY***
 
 
 ///If the user presses the enter key (without typing quit), the program should hide a few random words in the scripture, clear the console screen, and display the scripture again.
@@ -37,11 +37,11 @@ class Program
             List<Word> _hiddenwords = new List<Word>();
 
             Scripture(_words);
-            reference();
+            Reference.ReferenceBuilder(reference1);
             
             do{
 
-            GetDisplayText( reference1);
+            GetDisplayText( );
             
             ///If the user types quit, the program should end.
             //////Prompt the user to press the enter key or type quit.
@@ -108,30 +108,7 @@ class Program
             return _words;
             }
 
-///*************************************************************************
-             Reference reference()
-            {
 
-                Library question = new Library();
-                    
-                string fullscript = question.getrandomscript();
-
-                string[] lines = fullscript.Split("~");
-
-              
-                string book = lines[0];
-                string chapter = lines[1];
-                string sverse = lines[2];
-                string everse = lines[3];
-    
-                reference1._book = book;
-                reference1._chapter =  int.Parse(chapter);
-                reference1._verse = int.Parse(sverse);
-                reference1._endverse = int.Parse(everse);         
-
-          
-            return reference1;
-            }
 ///*************************************************************************
 
 ///The program should continue prompting the user and hiding more words until all words in the scripture are hidden.
@@ -183,7 +160,7 @@ class Program
 ///Accommodate scriptures with multiple verses, such as "Proverbs 3:5-6".
 ///Provide multiple constructors for the scripture reference to handle the case of a single verse and a verse range ("Proverbs 3:5" or "Proverbs 3:5-6").
 
-             void GetDisplayText(Reference reference1)
+             void GetDisplayText()
 
             {
                 List<string> display =new List<string>();
@@ -192,22 +169,20 @@ class Program
 
                 referenceDis = reference1;
 
+             string Cone = Reference.GetDisplayTextRefrence(reference1);
+
                 foreach (var item in _words)
-
+                {
                  display.Add(item._text);
+                 }
 
+            
+           
+            
+            Console.WriteLine($"{Cone} {string.Join(" ",display)}");
+            
 
-            if (referenceDis._endverse != -1 )
-            {
-                Console.WriteLine($"{referenceDis._book} {referenceDis._chapter}:{referenceDis._verse}-{referenceDis._endverse} {string.Join(" ",display)}");
-            }
-
-            else
-            {
-
-                Console.WriteLine($"{referenceDis._book} {referenceDis._chapter}:{referenceDis._verse} {string.Join(" ",display)}");
-
-            }
+         
             }
     
 
