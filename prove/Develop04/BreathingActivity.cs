@@ -7,7 +7,7 @@ public class BreathingActivity:Activity
 
 {
 
-public void BreathingAct()
+public void  BreathingAct(List<Log> _log)
 {
 
 ///The description of this activity should be something like: "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing."
@@ -23,21 +23,22 @@ public void BreathingAct()
 ///After the starting message, the user is shown a series of messages alternating between "Breathe in..." and "Breathe out..."
     
 
-
- DateTime startTime = DateTime.Now;
+DateTime startTime = DateTime.Now;
 DateTime futureTime = startTime.AddSeconds(double.Parse(_duration));
 
 do{
-   Console.WriteLine("");
+    startTime = DateTime.Now;
+    
+    Console.WriteLine("");
     Console.Write("Breath in...");
 
     ShowCountDown(3);
 
-      Console.WriteLine("");
+    Console.WriteLine("");
     Console.Write("Breath out...");
 
- ShowCountDown(6);
-}while ( futureTime > startTime);
+    ShowCountDown(6);
+}while ( futureTime >= startTime);
 
 
 
@@ -51,6 +52,10 @@ do{
 
 ///The activity should conclude with the standard finishing message for all activities.
     DisplayEndingMessage();
+    
+  Program.LogAdd(_log,_name,_duration);
+
+  
 
 }
 

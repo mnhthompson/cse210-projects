@@ -25,7 +25,7 @@ private List<string> _prompts= new List<string>
 };
 
 
-public void ListingAct()
+public void ListingAct(List<Log> _log)
 {
     ///The description of this activity should be something like: "This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area."
     _description="This activity will help you reflect on the good things in your life by having you list as many things as you can in a certain area.";
@@ -42,6 +42,7 @@ public void ListingAct()
 DateTime futureTime = startTime.AddSeconds(double.Parse(_duration));
 
 do{
+    startTime = DateTime.Now;
 
 ///The user lists as many items as they can until they they reach the duration specified by the user at the beginning.
 Console.ReadLine();
@@ -54,6 +55,10 @@ _count+=1;
 Console.WriteLine($"you listed {_count} items");
 ///The activity should conclude with the standard finishing message for all activities.
     DisplayEndingMessage();
+
+    
+    Program.LogAdd(_log,_name,_duration);
+
 
 }
 void Run()

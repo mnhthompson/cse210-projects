@@ -36,8 +36,9 @@ private List<string> _questions = new List<string>
 };
 
 
-public void ReflectingAct()
+public  void  ReflectingAct(List<Log> _log)
 {
+
     ///The description of this activity should be something like: "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life."
    
     _description="This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
@@ -55,8 +56,9 @@ DateTime startTime = DateTime.Now;
 DateTime futureTime = startTime.AddSeconds(double.Parse(_duration));
 
 do{
+    startTime = DateTime.Now;
     ///After each question the program should pause for several seconds before continuing to the next one. While the program is paused it should display a kind of spinner.
-    GetRandomQuestion();
+    DisplayQuestion();
     ShowSpinner(5);
 }while ( futureTime > startTime);
 
@@ -67,6 +69,10 @@ do{
 
 ///The activity should conclude with the standard finishing message for all activities.
     DisplayEndingMessage();
+
+    Program.LogAdd(_log,_name,_duration);
+
+  
 }
 
 void Run()
@@ -75,7 +81,7 @@ void Run()
 
 }
 
-public string GetRandomPrompt()
+private string GetRandomPrompt()
 {
       
             Random rnd = new Random();
@@ -88,7 +94,7 @@ public string GetRandomPrompt()
 
 }
 
-public string GetRandomQuestion()
+private string GetRandomQuestion()
 {
       
             Random rnd = new Random();
@@ -101,13 +107,13 @@ public string GetRandomQuestion()
 
 }
 
-void DisplayPrompt()
+private void DisplayPrompt()
 {
     string prompt = GetRandomPrompt();
     Console.WriteLine($"{prompt}");
 }
 
-void DisplayQuestion()
+private void DisplayQuestion()
 {
     string questions = GetRandomQuestion();
     Console.WriteLine($"{questions}");

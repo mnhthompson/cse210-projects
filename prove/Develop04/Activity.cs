@@ -12,6 +12,11 @@ public string _description;
 
 public string _duration;
 
+public DateTime _date;
+
+
+
+
 
 ///Each activity should start with a common starting message that provides the name of the activity, a description, and asks for and sets the duration of the activity in seconds. Then, it should tell the user to prepare to begin and pause for several seconds.
 
@@ -62,16 +67,17 @@ public void ShowSpinner(int seconds)
 public void ShowCountDown(int seconds)
 {
 
-for (int i = seconds; i>0; i--)
+    for (int i = seconds; i>0; i--)
 
-{
-    Console.Write(i);
-    Thread.Sleep(1000);
-    Console.Write("\b \b");
+    {
+        Console.Write(i);
+        Thread.Sleep(1000);
+        Console.Write("\b \b");
+    }
 }
 
-}
 
 }
+
 
 ///Activity(){}
