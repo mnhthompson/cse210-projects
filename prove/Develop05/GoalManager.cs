@@ -22,13 +22,13 @@ public void GoalOrg()
 
     
 
-    _goals.Columns.Add("Name");
-    _goals.Columns.Add("Description");
-    _goals.Columns.Add("Type");
-    _goals.Columns.Add("Complete");
-    _goals.Columns.Add("Complete_Amount");
-    _goals.Columns.Add("Points");
-    _goals.Columns.Add("Bonus_Points");
+    _goals.Columns.Add("Hames");
+    _goals.Columns.Add("Test_guy");
+    _goals.Columns.Add("Simple");
+    _goals.Columns.Add("0");
+    _goals.Columns.Add("-1");
+    _goals.Columns.Add("100");
+    _goals.Columns.Add("-1");
 
     string menu = "-1";
     do{
