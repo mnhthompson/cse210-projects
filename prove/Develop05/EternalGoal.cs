@@ -9,7 +9,7 @@ class EternalGoal : Goal;
 
 {
 
-            public int _amountComplete;
+            private int _amountComplete;
 
 
         public void  EternalGoal(string _name,string _description, string _points, DataTable _goals);
@@ -20,31 +20,31 @@ class EternalGoal : Goal;
 
             _type = "Eternal";
 
-            _goals["Type"] = _type;
+            _eternal["Type"] = _type;
 
         Console.WriteLine("What is the Name of your goal?");
 
         _name = Console.ReadLine();
 
-        _goals["Name"] = _name;
+        _eternal["Name"] = _name;
 
         Console.WriteLine("Describe your goal?");
 
         _description = Console.ReadLine();
 
-        _goals["Description"] = _description;
+        _eternal["Description"] = _description;
 
         Console.WriteLine("What is it's point value?");
 
         _points = Console.ReadLine();
 
-        _goals["Points"] = _points;
+        _eternal["Points"] = _points;
 
-        _goals["Complete"] = "N/A";
+        _eternal["Complete"] = "N/A";
 
-        _goals["Complete_Amount"] = 0;
+        _eternal["Complete_Amount"] = 0;
 
-        _goals["Bonus_Points"] = "N/A";
+        _eternal["Bonus_Points"] = "N/A";
 
 
         _goals.Rows.Add(_eternal);
@@ -54,21 +54,31 @@ class EternalGoal : Goal;
         }
 
 
-        void RecordEvent();
+       
+
+        bool override IsComplete( DataTable _goals,int complete);
         {
 
-        }
+            int old = _goals.Rows[complete] ["Complete_Amount"];
+            int current = -1;
 
-        bool override IsComplete( DataTable _goals);
-        {
 
-            _goals.Rows[rowIndex].SetField("Complete_Amount", i++);
+            do
+            {
+                 current =+ 1;
+
+            _goals.Rows[complete].SetField("Complete_Amount", current);
+
+            
+
+             }while( current >= old);
 
         }
 
 
 
     ///string GetStringRepresentation();{    }
+    /// void RecordEvent();        {        }
 
 
 }
