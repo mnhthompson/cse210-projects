@@ -17,8 +17,8 @@ public void GoalOrg()
 
     
 
-    DataTable _goals = new DataTable();
-    
+   
+     DataTable _goals = new DataTable();
 
     
 
@@ -48,7 +48,7 @@ public void GoalOrg()
 
     else if (menu == "2")
     {
-        CreateGoal();
+        CreateGoal(_goals);
     }
 
     else if (menu == "3")        
@@ -80,90 +80,106 @@ public void ListGoals(DataTable _goals)
 
 
 
-                        foreach (DataRow row in  _goals.Rows)
-                    {
-                        
-                        
-                        string[] parts = row.Split(",");
+            for(int i = 0; i < _goals.Rows.Count; i++)
+        {
+
+            string _checker =  _goals.Rows[i]["Type"].ToString();            
+            
+            string[] parts = _checker.Split(",");
 
 
-                        string _name = parts[0];
-                        string _description = parts[1];                        
-                        string _type = parts[2];
-                        string _complete = parts[3];
-                        string _completeAmount = parts[4];
-                        string _points = parts[5];
-                        string _bonuspoints = parts[6];
+            string _name = parts[0];
+            string _description = parts[1];                        
+            string _kind = parts[2];
+            string _complete = parts[3];
+            string _completeAmount = parts[4];
+            string _points = parts[5];
+            string _bonuspoints = parts[6];
 
 
-                         for (int i = 0; i < _goals.Rows.Count; i++)                       
-
-                                if( _goals.Rows[i]["Type"] = "Simple" )
-                                {
-                                    int complete = int.Parse(parts[4]);
-                                    int points = int.Parse(parts[5]);
-
-                                    int _score =+ complete * points;
-                                    
-                                }
-
-                                else if( _goals.Rows[i]["Type"] = "Simple" )
-                                {
-                                        if  ( 1 == int.Parse(parts[3]) );
-                                    int points = int.Parse(parts[5]);
-
-                                    int _score =+ points;
-                                }
-                                
-
-                                else if( _goals.Rows[i]["Type"] = "Check" )
-                                {
-                                    int  top = int.Parse(parts[3]);
-                                    int  bottom = int.Parse(parts[4]);
-                                    
-
-                                    if  ( top == bottom) 
-                                    {
-
-                                        int complete = int.Parse(parts[3]);
-                                        int points = int.Parse(parts[5]);
-                                        int bonus = int.Parse(parts[6]);
-
-                                        int _score =+ (complete * points) + bonus;
-                                    }
-
-                                    else
-                                    {
-                                        
-                                        int complete = int.Parse(parts[3]);
-                                        int points = int.Parse(parts[5]);
-
-                                        int _score =+ (complete * points);
-                                    }
-
-                                
-                                
-
-
-      
-    }
-         Console.WriteLine($"{_name}{_description}{_type}{_complete}{_completeAmount}{_points}{_bonuspoints}");
+            Console.WriteLine($"{_name}{_description}{_kind}{_complete}{_completeAmount}{_points}{_bonuspoints}");
                                               
 
                     }
+
+
+            for (int i = 0; i < _goals.Rows.Count; i++) 
+            {  
+
+                string _decker =  _goals.Rows[i]["Type"].ToString();
+                string[] frags = _decker.Split(",");
+
+
+                if( _decker == "Eternal" )
+                {
+                    int complete = int.Parse(frags[4]);
+                    int points = int.Parse(frags[5]);
+
+                    int _score =+ complete * points;
+                    
+                }
+
+                else if( _decker == "Simple" )
+                {
+                        if  ( 1 == int.Parse(frags[3]) );
+                    int points = int.Parse(frags[5]);
+
+                    int _score =+ points;
+                }
+                
+
+                else if( _decker == "Check" )
+                {
+                    int  top = int.Parse(frags[3]);
+                    int  bottom = int.Parse(frags[4]);
+                    
+
+                    if  ( top == bottom) 
+                    {
+
+                        int complete = int.Parse(frags[3]);
+                        int points = int.Parse(frags[5]);
+                        int bonus = int.Parse(frags[6]);
+
+                        int _score =+ (complete * points) + bonus;
+                    }
+
+                    else
+                    {
+                        
+                        int complete = int.Parse(frags[3]);
+                        int points = int.Parse(frags[5]);
+
+                        int _score =+ (complete * points);
+                    }    
+                    
+                }
+        
                     Console.WriteLine($"Score:{_score}");
     
 
+    }
     }
 
 }
 
 /// Allow the user to create new goals of any type.
-    void CreateGoal()
+    void CreateGoal(DataTable _goals)
     {
         string goalmenu = "-1";
+        
+
+
+
+        
 
         do{
+
+    
+
+
+
+
         Console.WriteLine("1. Simple Goals");
         Console.WriteLine("2. Eternal Goals");
         Console.WriteLine("3. Checklist Goals");
@@ -173,19 +189,19 @@ public void ListGoals(DataTable _goals)
         if (goalmenu == "1")
         {
             
-                    var Screate = new SimpleGoal();
+            Goal Screate = new SimpleGoal(kind,  name,  description,  points, isComplete);
             Screate.Goals(_goals);
         }
 
         else if (goalmenu == "2")
         {
-                    var Ecreate = new EternalGoal();
+            Goal Ecreate = new EternalGoal(kind,  name,  description,  points, isComplete);
             Ecreate.Goals(_goals);
         }
 
         else if (goalmenu == "3")        
         {
-            var Ccreate = new ChecklistGoal();
+            Goal Ccreate = new ChecklistGoal(kind,  name,  description,  points, amountComplete, target,  bonus );
             Ccreate.Goals(_goals);
         }
         else
@@ -194,8 +210,12 @@ public void ListGoals(DataTable _goals)
     }
 /// Allow the user to record an event (meaning they have accomplished a goal and should receive points).
 ///
-    public void RecordEvent(DataTable _goals)
+    public static void RecordEvent(DataTable _goals)
     {
+
+
+
+
         Console.WriteLine("Please input Goals Number");
         string _complete = Console.ReadLine();
 
@@ -205,19 +225,19 @@ public void ListGoals(DataTable _goals)
         
         if( _checker == "Eternal" )
         {
-            var Eupdate = new EternalGoal();
+            Goal Eupdate = new EternalGoal(kind,  name,  description,  points, _isComplete);
             Eupdate.IsComplete(_goals, complete);
         }
 
         else if( _checker == "Simple" )
         {
-            var Supdate = new SimpleGoal();
+            Goal Supdate = new SimpleGoal(kind,  name,  description,  points, _isComplete);
             Supdate.IsComplete(_goals, complete);
         }
 
         else if( _checker == "Check" )
         {
-            var Cupdate = new ChecklistGoal();
+            Goal Cupdate = new ChecklistGoal(kind,  name,  description,  points, _amountComplete, _target,  _bonus );
             Cupdate.IsComplete(_goals, complete);
         }
 

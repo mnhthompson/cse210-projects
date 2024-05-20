@@ -11,16 +11,22 @@ public class EternalGoal:Goal
 
             private int _amountComplete;
 
+        public EternalGoal(string type, string name, string description, int points,int amountComplete): base(type, name, description, points)
+    {    }
 
-        public DataTable  Goals(string _name,string _description, string _points, DataTable _goals)
+    ///***********************************************************************************************************************************************************
+            
+
+
+        override public DataTable  Goals(DataTable _goals)
         {
 
             DataRow _eternal = _goals.NewRow();
             Console.WriteLine("");
 
-            _type = "Eternal";
+            _kind = "Eternal";
 
-            _eternal["Type"] = _type;
+            _eternal["Type"] = _kind;
 
         Console.WriteLine("What is the Name of your goal?");
 
@@ -36,7 +42,9 @@ public class EternalGoal:Goal
 
         Console.WriteLine("What is it's point value?");
 
-        _points = Console.ReadLine();
+        string points = Console.ReadLine();
+
+         _points = int.Parse(points);
 
         _eternal["Points"] = _points;
 
@@ -56,7 +64,7 @@ public class EternalGoal:Goal
 
        
 
-         DataTable IsComplete( DataTable _goals,int complete)
+         public override void  IsComplete( DataTable _goals,int complete)
         {
 
            
@@ -77,8 +85,6 @@ public class EternalGoal:Goal
 
              }while( current >= old);
 
-
-             return _goals;
 
         }
 

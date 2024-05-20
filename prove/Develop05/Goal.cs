@@ -5,7 +5,7 @@ public abstract class Goal
 
 {
 
-    public string _type;
+    public string _kind;
 
     
     public string _name;
@@ -15,16 +15,16 @@ public abstract class Goal
     public int _points;
 
 
-    public Goal(string type, string name, string description, int points)
+    public Goal(string kind, string name, string description, int points)
     {
-        _type = type;
+        _kind = kind;
         _name = name;
         _description = description;
         _points = points;
     }
-    public string GetType()
+    public string Getkind()
     {
-        return _type;
+        return _kind;
     }
     public string GetName()
     {
@@ -41,15 +41,11 @@ public abstract class Goal
 
 
 ///method
-      public abstract bool IsComplete()
-    {
+      public abstract void IsComplete( DataTable _goals, int complete);
+ 
 
-    }
-
-    void Goals()
-    {
-        
-    }
+   public abstract DataTable Goals(DataTable _goals);
+   
 
     ///string GetDetailsString();{  }
 

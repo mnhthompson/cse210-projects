@@ -9,17 +9,26 @@ public class SimpleGoal : Goal
 
 
 {
-    public bool _isComplete;
+    public int _isComplete;
 
-    public DataTable Goals(string _name,string _description, string _points, string _type, DataTable _goals)
+ 
+        public SimpleGoal(string kind, string name, string description, int points,int isComplete): base(kind, name, description, points)
+    { 
+
+    }
+
+    
+    ///***********************************************************************************************************************************************************
+
+    override public DataTable Goals(DataTable _goals)
     {
 
     DataRow _simple = _goals.NewRow();
         Console.WriteLine("");
 
-        _type = "Simple";
+        _kind = "Simple";
 
-        _simple["Type"] = _type;
+        _simple["Type"] = _kind;
 
     Console.WriteLine("What is the Name of your goal?");
 
@@ -35,7 +44,9 @@ public class SimpleGoal : Goal
 
     Console.WriteLine("What is it's point value?");
 
-    _points = Console.ReadLine();
+    string points = Console.ReadLine();
+
+     _points = int.Parse(points);
 
     _simple["Points"] = _points;
 
@@ -55,13 +66,12 @@ public class SimpleGoal : Goal
 
     
 
-    public DataTable IsComplete( DataTable _goals, int complete)
+    override public void IsComplete( DataTable _goals, int complete)
     {
 
         _goals.Rows[complete].SetField("Complete", 1);
 
-        return _goals;
-        
+
 
     }
 

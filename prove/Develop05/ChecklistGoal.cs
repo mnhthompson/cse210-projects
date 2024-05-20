@@ -15,7 +15,15 @@ public class ChecklistGoal : Goal
 
     public int _bonus;
 
-    public DataTable Goals(string _name,string _description, string _points, int _target, int _amountComplete, int _bonus, DataTable _goals)
+
+
+ 
+        public ChecklistGoal(string type, string name, string description, int points,int amountComplete,int target, int bonus ): base(type, name, description, points)
+    {    }
+
+    ///***********************************************************************************************************************************************************
+
+    public override DataTable Goals(DataTable _goals)
     {
         Console.WriteLine("");
 
@@ -23,9 +31,9 @@ public class ChecklistGoal : Goal
         DataRow _check = _goals.NewRow();
         Console.WriteLine("");
 
-        _type = "Check";
+        _kind = "Check";
 
-        _check["Type"] = _type;
+        _check["Type"] = _kind;
 
     Console.WriteLine("What is the Name of your goal?");
 
@@ -41,7 +49,9 @@ public class ChecklistGoal : Goal
 
     Console.WriteLine("What is it's point value?");
 
-    _points = Console.ReadLine();
+    string points = Console.ReadLine();
+
+    _points = int.Parse(points);
 
     _check["Points"] = _points;
 
@@ -72,7 +82,7 @@ public class ChecklistGoal : Goal
 
     }
 
-    DataTable IsComplete( DataTable _goals, int complete)
+    public override void IsComplete( DataTable _goals, int complete)
     {
 
 
@@ -94,11 +104,7 @@ public class ChecklistGoal : Goal
 
             }while( current >= old);
 
-
-         return _goals;
-
             
-
     }
 
     ///string GetDetailsString();{  }
