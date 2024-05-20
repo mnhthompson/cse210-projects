@@ -52,9 +52,9 @@ public class SimpleGoal : Goal
 
     _simple["Complete"] = 0;
 
-    _simple["Complete_Amount"] = "N/A";
+    _simple["Complete_Amount"] = -1;
 
-    _simple["Bonus_Points"] = "N/A";
+    _simple["Bonus_Points"] = -1;
 
 
     _goals.Rows.Add(_simple);

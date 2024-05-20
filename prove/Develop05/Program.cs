@@ -7,6 +7,8 @@ using System;
 ///
 /// Follow the principles of encapsulation and abstraction by having private member variables and putting related items in the same class.
 ///
+/// Creative**** i used a DataTable
+
 class Program
 {
     static void Main(string[] args)

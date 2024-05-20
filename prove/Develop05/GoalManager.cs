@@ -34,7 +34,6 @@ public void GoalOrg()
     do{
     Console.WriteLine("1. Display Goals");
     Console.WriteLine("2. Create Goals");
-///broken
     Console.WriteLine("3. Record Events");
     Console.WriteLine("4. Save Progress");
     Console.WriteLine("5. Load Goals");
@@ -79,7 +78,7 @@ public void GoalOrg()
 
 
 /// Display the user's score.
-/// Creative**** Add your own ideas for gamification. This could include leveling up, earning certain bonuses, or other "fun" aspects to the quest.
+
 /// Show a list of the goals. This list should show indicate whether the goal has been completed or not (for example [ ] compared to [X]), and for checklist goals it should show how many times the goal has been completed (for example Completed 2/5 times).
 ///
 public void ListGoals(DataTable _goals)
@@ -103,51 +102,68 @@ public void Score(DataTable _goals)
 
             for (int i = 0; i < _goals.Rows.Count; i++) 
             {  
-                
 
                 string _decker =  _goals.Rows[i]["Type"].ToString();
 
-                string _docker =  _goals.Rows[i].ToString();
+                var _docker = string.Join(", ", _goals.Rows[i].ItemArray);
 
+
+               
 
                 string[] frags = _docker.Split(",");
+                
 
+               
                     int  top = int.Parse(frags[3]);
+
+               
                     int complete = int.Parse(frags[4]);
+
+              
                     int points = int.Parse(frags[5]);
 
+                
                     int bonus = int.Parse(frags[6]);
+
+                   
 
                                 
 
 
                 if( _decker == "Eternal" )
                 {
-                     _score =+ complete * points;
+                    
+                     _score += complete * points;
                     
                 }
 
                 else if( _decker == "Simple" )
                 {
+                    
                         if  ( top == 1)
                            {
+                            
 
-                             _score =+ points;}          
+                             _score += points;}          
                 }
                 
 
                 else if( _decker == "Check" )
                 {
 
+                    
+                    
                     if  ( top == complete) 
                     {
-                         _score =+ (complete * points) + bonus;
+                        
+                         _score += (complete * points) + bonus;
                     }
 
                     else
                     {
                         
-                        _score =+ (complete * points);
+                        
+                        _score += (complete * points);
                     }    
                     
                 }

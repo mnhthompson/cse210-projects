@@ -52,11 +52,11 @@ public class EternalGoal:Goal
 
         _eternal["Points"] = _points;
 
-        _eternal["Complete"] = "N/A";
+        _eternal["Complete"] = -1;
 
         _eternal["Complete_Amount"] = 0;
 
-        _eternal["Bonus_Points"] = "N/A";
+        _eternal["Bonus_Points"] = -1;
 
 
         _goals.Rows.Add(_eternal);
@@ -81,13 +81,13 @@ public class EternalGoal:Goal
 
             do
             {
-                 current =+ 1;
+                 current += 1;
 
             _goals.Rows[complete].SetField("Complete_Amount", current);
 
             
 
-             }while( current >= old);
+             }while( current <= old);
 
 
         }

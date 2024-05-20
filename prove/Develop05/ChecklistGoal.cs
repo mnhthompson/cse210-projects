@@ -114,13 +114,13 @@ public class ChecklistGoal : Goal
 
             do{
             
-                current+=1;
+                current += 1;
 
             _goals.Rows[complete].SetField("Complete", current);
 
             
 
-            }while( current >= old);
+            }while( current <= old);
 
             
     }
