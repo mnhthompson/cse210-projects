@@ -1,32 +1,54 @@
 using System;
  using System.Data;
 
-public abstract class Goal;
+public abstract class Goal
 
 {
 
-    private string _type;
+    public string _type;
 
-    public string _shortName;
+    
+    public string _name;
 
     public string _description;
 
-    public string _points;
+    public int _points;
 
 
-     void  Goal(string _name,string _description, string _points);
+    public Goal(string type, string name, string description, int points)
+    {
+        _type = type;
+        _name = name;
+        _description = description;
+        _points = points;
+    }
+    public string GetType()
+    {
+        return _type;
+    }
+    public string GetName()
+    {
+        return _name;
+    }
+    public string GetDescription()
+    {
+        return _description;
+    }
+    public int GetPoints()
+    {
+        return _points;
+    }
+
+
+///method
+      public abstract bool IsComplete()
     {
 
     }
 
-     void RecordEvent();
+    void Goals()
     {
-
-    }
-
-     bool  IsComplete();
-    {
-
+        
     }
 
     ///string GetDetailsString();{  }

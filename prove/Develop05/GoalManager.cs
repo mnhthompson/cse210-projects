@@ -2,9 +2,9 @@
 
 using System.Security.Cryptography.X509Certificates;
  using System.Data;
- using System.Text
+ using System.Text;
 
-public class GoalManager;
+public class GoalManager
 
 {
 
@@ -53,7 +53,7 @@ public void GoalOrg()
 
     else if (menu == "3")        
     {
-        RecordEvent();
+        RecordEvent(_goals);
     }
     else if (menu == "4")
     {
@@ -72,25 +72,19 @@ public void GoalOrg()
 
 /// Display the user's score.
 /// Creative**** Add your own ideas for gamification. This could include leveling up, earning certain bonuses, or other "fun" aspects to the quest.
-
-void DisplayPlayerInfo(int _score, DataTable _goals);
-{
-
-    Console.WriteLine($"Score:{_score}");
-
-
-}
 /// Show a list of the goals. This list should show indicate whether the goal has been completed or not (for example [ ] compared to [X]), and for checklist goals it should show how many times the goal has been completed (for example Completed 2/5 times).
 ///
-public void ListGoals(DataTable _goals, int _score);
+public void ListGoals(DataTable _goals)
 {
     {
 
-                        foreach (string line in  lines)
+
+
+                        foreach (DataRow row in  _goals.Rows)
                     {
                         
                         
-                        string[] parts = line.Split(",");
+                        string[] parts = row.Split(",");
 
 
                         string _name = parts[0];
@@ -101,9 +95,10 @@ public void ListGoals(DataTable _goals, int _score);
                         string _points = parts[5];
                         string _bonuspoints = parts[6];
 
-                        
 
-                                if( _goals.Rows[line]["Type"] = "Simple" );
+                         for (int i = 0; i < _goals.Rows.Count; i++)                       
+
+                                if( _goals.Rows[i]["Type"] = "Simple" )
                                 {
                                     int complete = int.Parse(parts[4]);
                                     int points = int.Parse(parts[5]);
@@ -112,7 +107,7 @@ public void ListGoals(DataTable _goals, int _score);
                                     
                                 }
 
-                                else if( _goals.Rows[line]["Type"] = "Simple" );
+                                else if( _goals.Rows[i]["Type"] = "Simple" )
                                 {
                                         if  ( 1 == int.Parse(parts[3]) );
                                     int points = int.Parse(parts[5]);
@@ -121,13 +116,13 @@ public void ListGoals(DataTable _goals, int _score);
                                 }
                                 
 
-                                else if( _goals.Rows[line]["Type"] = "Check" );
+                                else if( _goals.Rows[i]["Type"] = "Check" )
                                 {
                                     int  top = int.Parse(parts[3]);
                                     int  bottom = int.Parse(parts[4]);
                                     
 
-                                    if  ( top == bottom) ;
+                                    if  ( top == bottom) 
                                     {
 
                                         int complete = int.Parse(parts[3]);
@@ -164,71 +159,73 @@ public void ListGoals(DataTable _goals, int _score);
 }
 
 /// Allow the user to create new goals of any type.
-void CreateGoal();
-{
-    string goalmenu = "-1";
-
-    do{
-    Console.WriteLine("1. Simple Goals");
-    Console.WriteLine("2. Eternal Goals");
-    Console.WriteLine("3. Checklist Goals");
-    Console.WriteLine("4. Exit");
-    goalmenu = Console.ReadLine();
-
-    if (goalmenu == "1")
+    void CreateGoal()
     {
-        
-                 var Screate = new SimpleGoal();
-        Screate.SimpleGoal();
-    }
+        string goalmenu = "-1";
 
-    else if (goalmenu == "2")
-    {
-        
-                 var Ecreate = new EternalGoal();
-        Ecreate.EternalGoal();
-    }
+        do{
+        Console.WriteLine("1. Simple Goals");
+        Console.WriteLine("2. Eternal Goals");
+        Console.WriteLine("3. Checklist Goals");
+        Console.WriteLine("4. Exit");
+        goalmenu = Console.ReadLine();
 
-    else if (goalmenu == "3")        
-    {
-         var Ccreate = new ChecklistGoal();
-        Ccreate.ChecklistGoal();
+        if (goalmenu == "1")
+        {
+            
+                    var Screate = new SimpleGoal();
+            Screate.Goals(_goals);
+        }
+
+        else if (goalmenu == "2")
+        {
+                    var Ecreate = new EternalGoal();
+            Ecreate.Goals(_goals);
+        }
+
+        else if (goalmenu == "3")        
+        {
+            var Ccreate = new ChecklistGoal();
+            Ccreate.Goals(_goals);
+        }
+        else
+        {Console.WriteLine("INVALID SELECTION");}
+        }while(goalmenu != "4");
     }
-    else
-    {Console.WriteLine("INVALID SELECTION");}
-    }while(goalmenu != "4");
-}
 /// Allow the user to record an event (meaning they have accomplished a goal and should receive points).
 ///
-public void RecordEvent(DataTable _goals);
-{
-    Console.WriteLine("Please input Goals Number");
-    string complete = Console.ReadLine();
-
-    
-    if( _goals.Rows[complete] ["Type"] = "Eternal" );
+    public void RecordEvent(DataTable _goals)
     {
-        var Eupdate = new EternalGoal();
-        Eupdate.IsComplete(_goals, complete);
+        Console.WriteLine("Please input Goals Number");
+        string _complete = Console.ReadLine();
+
+        int complete= int.Parse( _complete );
+
+        string _checker =  _goals.Rows[complete] ["Type"].ToString();
+        
+        if( _checker == "Eternal" )
+        {
+            var Eupdate = new EternalGoal();
+            Eupdate.IsComplete(_goals, complete);
+        }
+
+        else if( _checker == "Simple" )
+        {
+            var Supdate = new SimpleGoal();
+            Supdate.IsComplete(_goals, complete);
+        }
+
+        else if( _checker == "Check" )
+        {
+            var Cupdate = new ChecklistGoal();
+            Cupdate.IsComplete(_goals, complete);
+        }
+
+
+
     }
-
-    else if( _goals.Rows[complete]["Type"] = "Simple" );
-    {
-        var Supdate = new SimpleGoal();
-        Supdate.IsComplete(_goals, complete);
-    }
-
-    else if( _goals.Rows[complete]["Type"] = "Check" );
-    {
-        var Cupdate = new ChecklistGoal();
-        Cupdate.IsComplete(_goals, complete);
-    }
-
-
-
-}
 /// Allow the user's goals and their current score to be saved and loaded.
-static void SaveGoals(DataTable _goals);
+static void SaveGoals(DataTable _goals)
 {
     Console.WriteLine("Please input filename");
     string filename = Console.ReadLine();
@@ -251,7 +248,7 @@ File.WriteAllText(filename, glue.ToString());
  
 
 }
- static void  LoadGoals(DataTable _goals);
+ static DataTable  LoadGoals(DataTable _goals)
 {
           
         
@@ -289,9 +286,8 @@ File.WriteAllText(filename, glue.ToString());
 }
 
 
-
+///void Start(); {}
+///void ListGoalDetails();{}
 
 }
 
-///void Start(); {}
-///void ListGoalDetails();{}

@@ -1,7 +1,7 @@
 using System;
  using System.Data;
 
-public class SimpleGoal : Goal;
+public class SimpleGoal : Goal
 
 /// Provide for simple goals that can be marked complete and the user gains some value.
 ///For example, if you run a marathon you get 1000 points.
@@ -11,7 +11,7 @@ public class SimpleGoal : Goal;
 {
     public bool _isComplete;
 
-    public void  SimpleGoal(string _name,string _description, string _points, string _type, DataTable _goals);
+    public DataTable Goals(string _name,string _description, string _points, string _type, DataTable _goals)
     {
 
     DataRow _simple = _goals.NewRow();
@@ -53,17 +53,14 @@ public class SimpleGoal : Goal;
 
     }
 
-    void RecordEvent();
-    {
+    
 
-    }
-
-    bool override IsComplete( DataTable _goals, int complete);
+    public DataTable IsComplete( DataTable _goals, int complete)
     {
 
         _goals.Rows[complete].SetField("Complete", 1);
 
-        
+        return _goals;
         
 
     }
@@ -71,6 +68,7 @@ public class SimpleGoal : Goal;
 
 
     ///string GetStringRepresentation();{    }
+    ///void RecordEvent();{    }
 
 
 }

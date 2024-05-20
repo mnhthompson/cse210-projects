@@ -4,7 +4,7 @@ using System;
 ///Provide for a checklist goal that must be accomplished a certain number of times to be complete. Each time the user records this goal they gain some value, but when they achieve the desired amount, they get an extra bonus.
 ///For example, if you set a goal to attend the temple 10 times, you might get 50 points each time you go, and then a bonus of 500 points on the 10th time.
 
-class ChecklistGoal : Goal;
+public class ChecklistGoal : Goal
 
 
 {
@@ -15,7 +15,7 @@ class ChecklistGoal : Goal;
 
     public int _bonus;
 
-    public void  ChecklistGoal(string _name,string _description, string _points, int _target, int _amountComplete, int _bonus, DataTable _goals);
+    public DataTable Goals(string _name,string _description, string _points, int _target, int _amountComplete, int _bonus, DataTable _goals)
     {
         Console.WriteLine("");
 
@@ -47,7 +47,9 @@ class ChecklistGoal : Goal;
 
     Console.WriteLine("What is it's Bonus point value?");
 
-    _bonus = Console.ReadLine();
+    string Bonus = Console.ReadLine();
+
+    _bonus = int.Parse(Bonus);
 
     _check["Bonus_Points"] = _bonus;
 
@@ -55,9 +57,11 @@ class ChecklistGoal : Goal;
 
     Console.WriteLine("How many times?");
 
-    _target = Console.ReadLine();
+    string Target = Console.ReadLine();
 
-    _check["Complete_Amount"] = int.Parse(_target);
+    _target = int.Parse(Target);
+
+    _check["Complete_Amount"] = _target;
 
 
     _goals.Rows.Add(_check);
@@ -68,37 +72,30 @@ class ChecklistGoal : Goal;
 
     }
 
-
-    void RecordEvent();
+    DataTable IsComplete( DataTable _goals, int complete)
     {
 
-    }
 
-    bool override IsComplete( DataTable _goals, int complete);
-    {
+         int Cherry = int.Parse(_goals.Rows[complete]["Complete"].ToString());
     
 
-    
-
-    
-
-                int old = _goals.Rows[complete] ["Complete"]
+            int old =Cherry;
+            
+            int current = 0;
 
 
-                do{
-                (
-                    int current+=1;
+            do{
+            
+                current+=1;
 
-                _goals.Rows[complete].SetField("Complete", current);
+            _goals.Rows[complete].SetField("Complete", current);
 
-                
+            
 
-                }while( current >= old);
+            }while( current >= old);
 
-                if (_goals.Rows[complete]["Complete"] == _goals.Rows[complete]["Complete_Amount"])
-        {///award bonus
-        
-        }
+
+         return _goals;
 
             
 
@@ -107,6 +104,8 @@ class ChecklistGoal : Goal;
     ///string GetDetailsString();{  }
 
     ///string GetStringRepresentation();{    }
+
+    ///void RecordEvent();    {    }
 
 
 }
