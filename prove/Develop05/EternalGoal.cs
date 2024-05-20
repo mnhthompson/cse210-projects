@@ -9,10 +9,14 @@ public class EternalGoal:Goal
 
 {
 
-            private int _amountComplete;
+            
 
-        public EternalGoal(string type, string name, string description, int points,int amountComplete): base(type, name, description, points)
-    {    }
+        public EternalGoal(string kind, string name, string description, int points): base(kind, name, description, points)
+    {
+
+     }
+
+
 
     ///***********************************************************************************************************************************************************
             

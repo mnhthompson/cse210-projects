@@ -9,15 +9,15 @@ public class SimpleGoal : Goal
 
 
 {
-    public int _isComplete;
 
  
-        public SimpleGoal(string kind, string name, string description, int points,int isComplete): base(kind, name, description, points)
+        public SimpleGoal(string kind, string name, string description, int points): base(kind, name, description, points)
     { 
 
+    
     }
 
-    
+
     ///***********************************************************************************************************************************************************
 
     override public DataTable Goals(DataTable _goals)
@@ -71,6 +71,7 @@ public class SimpleGoal : Goal
 
         _goals.Rows[complete].SetField("Complete", 1);
 
+       
 
 
     }

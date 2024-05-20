@@ -32,18 +32,20 @@ public void GoalOrg()
 
     string menu = "-1";
     do{
-    Console.WriteLine("1. Display Goals & Check Score");
+    Console.WriteLine("1. Display Goals");
     Console.WriteLine("2. Create Goals");
+///broken
     Console.WriteLine("3. Record Events");
     Console.WriteLine("4. Save Progress");
     Console.WriteLine("5. Load Goals");
-    Console.WriteLine("6. Exit");
+///broken
+    Console.WriteLine("6. Check Score");
+    Console.WriteLine("7. Exit");
     menu = Console.ReadLine();
 
     if (menu == "1")
     {
         ListGoals( _goals);
-       
     }
 
     else if (menu == "2")
@@ -63,9 +65,15 @@ public void GoalOrg()
     {
         LoadGoals(_goals);
     }
+
+    else if (menu == "6")
+    {
+        Score( _goals);
+    }
+
     else
     {Console.WriteLine("INVALID SELECTION");}
-    }while(menu != "6");
+    }while(menu != "7");
 
 }
 
@@ -78,79 +86,68 @@ public void ListGoals(DataTable _goals)
 {
     {
 
+            foreach (DataRow dr in _goals.Rows)
+            {
+                foreach (var item in dr.ItemArray)
+                {
+                    Console.Write(item + " ");
+                }
+                Console.WriteLine();
+              }
 
-
-            for(int i = 0; i < _goals.Rows.Count; i++)
-        {
-
-            string _checker =  _goals.Rows[i]["Type"].ToString();            
-            
-            string[] parts = _checker.Split(",");
-
-
-            string _name = parts[0];
-            string _description = parts[1];                        
-            string _kind = parts[2];
-            string _complete = parts[3];
-            string _completeAmount = parts[4];
-            string _points = parts[5];
-            string _bonuspoints = parts[6];
-
-
-            Console.WriteLine($"{_name}{_description}{_kind}{_complete}{_completeAmount}{_points}{_bonuspoints}");
-                                              
-
-                    }
-
+             }}
+                                                
+public void Score(DataTable _goals)
+{
+    int _score = 0;  
 
             for (int i = 0; i < _goals.Rows.Count; i++) 
             {  
+                
 
                 string _decker =  _goals.Rows[i]["Type"].ToString();
-                string[] frags = _decker.Split(",");
+
+                string _docker =  _goals.Rows[i].ToString();
+
+
+                string[] frags = _docker.Split(",");
+
+                    int  top = int.Parse(frags[3]);
+                    int complete = int.Parse(frags[4]);
+                    int points = int.Parse(frags[5]);
+
+                    int bonus = int.Parse(frags[6]);
+
+                                
 
 
                 if( _decker == "Eternal" )
                 {
-                    int complete = int.Parse(frags[4]);
-                    int points = int.Parse(frags[5]);
-
-                    int _score =+ complete * points;
+                     _score =+ complete * points;
                     
                 }
 
                 else if( _decker == "Simple" )
                 {
-                        if  ( 1 == int.Parse(frags[3]) );
-                    int points = int.Parse(frags[5]);
+                        if  ( top == 1)
+                           {
 
-                    int _score =+ points;
+                             _score =+ points;}          
                 }
                 
 
                 else if( _decker == "Check" )
                 {
-                    int  top = int.Parse(frags[3]);
-                    int  bottom = int.Parse(frags[4]);
-                    
 
-                    if  ( top == bottom) 
+                    if  ( top == complete) 
                     {
-
-                        int complete = int.Parse(frags[3]);
-                        int points = int.Parse(frags[5]);
-                        int bonus = int.Parse(frags[6]);
-
-                        int _score =+ (complete * points) + bonus;
+                         _score =+ (complete * points) + bonus;
                     }
 
                     else
                     {
                         
-                        int complete = int.Parse(frags[3]);
-                        int points = int.Parse(frags[5]);
-
-                        int _score =+ (complete * points);
+                        _score =+ (complete * points);
                     }    
                     
                 }
@@ -161,23 +158,21 @@ public void ListGoals(DataTable _goals)
     }
     }
 
-}
+
 
 /// Allow the user to create new goals of any type.
     void CreateGoal(DataTable _goals)
     {
         string goalmenu = "-1";
         
-
-
-
-        
+      string kind;
+        string name;
+        string description;
+        int points;
+        int target;
+        int bonus;
 
         do{
-
-    
-
-
 
 
         Console.WriteLine("1. Simple Goals");
@@ -188,21 +183,37 @@ public void ListGoals(DataTable _goals)
 
         if (goalmenu == "1")
         {
+            kind = "null";
+            name = "null";
+            description= "null";
+            points= 0;
             
-            Goal Screate = new SimpleGoal(kind,  name,  description,  points, isComplete);
-            Screate.Goals(_goals);
+        Goal Screate = new SimpleGoal(kind,  name,  description,  points);
+           Screate.Goals(_goals);
         }
 
         else if (goalmenu == "2")
         {
-            Goal Ecreate = new EternalGoal(kind,  name,  description,  points, isComplete);
-            Ecreate.Goals(_goals);
+            kind = "null";
+            name = "null";
+            description= "null";
+            points= 0;
+
+           Goal Ecreate = new EternalGoal(kind, name ,description ,points );
+          Ecreate.Goals(_goals);
         }
 
         else if (goalmenu == "3")        
         {
-            Goal Ccreate = new ChecklistGoal(kind,  name,  description,  points, amountComplete, target,  bonus );
-            Ccreate.Goals(_goals);
+            kind = "null";
+            name = "null";
+            description= "null";
+            points= 0;
+            target= 0;
+            bonus= 0;
+           
+           Goal Ccreate = new ChecklistGoal(kind,  name,  description,  points, target, bonus );
+           Ccreate.Goals(_goals);
         }
         else
         {Console.WriteLine("INVALID SELECTION");}
@@ -213,9 +224,16 @@ public void ListGoals(DataTable _goals)
     public static void RecordEvent(DataTable _goals)
     {
 
+         string kind;
+        string name;
+        string description;
+        int points;
+        int target;
+        int bonus;
 
+        
 
-
+        
         Console.WriteLine("Please input Goals Number");
         string _complete = Console.ReadLine();
 
@@ -225,20 +243,40 @@ public void ListGoals(DataTable _goals)
         
         if( _checker == "Eternal" )
         {
-            Goal Eupdate = new EternalGoal(kind,  name,  description,  points, _isComplete);
-            Eupdate.IsComplete(_goals, complete);
+            Console.WriteLine("Eternal");
+            kind = "null";
+            name = "null";
+            description= "null";
+            points= 0;
+
+          Goal Eupdate = new EternalGoal(kind,  name,  description,  points);
+          Eupdate.IsComplete(_goals, complete);
         }
 
         else if( _checker == "Simple" )
         {
-            Goal Supdate = new SimpleGoal(kind,  name,  description,  points, _isComplete);
-            Supdate.IsComplete(_goals, complete);
+            Console.WriteLine("Simple");
+            kind = "null";
+            name = "null";
+            description= "null";
+            points= 0;
+
+            Goal Supdate = new SimpleGoal(kind,  name,  description,  points);
+           Supdate.IsComplete(_goals, complete);
         }
 
         else if( _checker == "Check" )
         {
-            Goal Cupdate = new ChecklistGoal(kind,  name,  description,  points, _amountComplete, _target,  _bonus );
-            Cupdate.IsComplete(_goals, complete);
+            Console.WriteLine("Check");
+            kind = "null";
+            name = "null";
+            description= "null";
+            points= 0;
+            target= 0;
+            bonus= 0;
+
+           Goal Cupdate = new ChecklistGoal(kind,  name,  description,  points, target,  bonus );
+           Cupdate.IsComplete(_goals, complete);
         }
 
 
@@ -270,8 +308,8 @@ File.WriteAllText(filename, glue.ToString());
 }
  static DataTable  LoadGoals(DataTable _goals)
 {
-          
-        
+
+    Console.WriteLine("Please input filename");
 
         string filename = Console.ReadLine();
         
@@ -280,6 +318,8 @@ File.WriteAllText(filename, glue.ToString());
         
                 foreach (string line in  lines)
                     {
+                       
+
                         DataRow _load = _goals.NewRow();
                         
                         string[] parts = line.Split(",");
@@ -294,9 +334,9 @@ File.WriteAllText(filename, glue.ToString());
                         _load["Bonus_Points"] = parts[6];
 
                         _goals.Rows.Add(_load);
-                                              
+                        }            
 
-                    }
+                    
 
                     
 
