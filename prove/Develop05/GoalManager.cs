@@ -28,7 +28,7 @@ public void GoalOrg()
     _goals.Columns.Add("0");
     _goals.Columns.Add("-1");
     _goals.Columns.Add("100");
-    _goals.Columns.Add("-1");
+    _goals.Columns.Add("-11");
 
     string menu = "-1";
     do{
