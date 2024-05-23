@@ -22,7 +22,7 @@ public void GoalOrg()
 
     
 
-    _goals.Columns.Add("Names");
+    _goals.Columns.Add("Name");
     _goals.Columns.Add("Description");
     _goals.Columns.Add("Type");
     _goals.Columns.Add("Complete");
