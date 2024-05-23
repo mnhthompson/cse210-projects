@@ -37,7 +37,6 @@ public void GoalOrg()
     Console.WriteLine("3. Record Events");
     Console.WriteLine("4. Save Progress");
     Console.WriteLine("5. Load Goals");
-///broken
     Console.WriteLine("6. Check Score");
     Console.WriteLine("7. Exit");
     menu = Console.ReadLine();
