@@ -78,8 +78,8 @@ public class SimpleGoal : Goal
 
 
 
-    ///string GetStringRepresentation();{    }
-    ///void RecordEvent();{    }
+    ///string GetStringRepresentation(){    }
+    ///void RecordEvent(){    }
 
 
 }

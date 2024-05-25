@@ -47,8 +47,8 @@ public abstract class Goal
    public abstract DataTable Goals(DataTable _goals);
    
 
-    ///string GetDetailsString();{  }
+    ///string GetDetailsString(){  }
 
-    ///string GetStringRepresentation();{    }
+    ///string GetStringRepresentation(){    }
 }
 
